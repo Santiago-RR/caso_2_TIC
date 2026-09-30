@@ -19,6 +19,7 @@ public class GeneradorReferencias {
             fileOutput.println("TP=" + tam_pag);
             fileOutput.println("NF1=" + filas);
             fileOutput.println("NC1=" + columnas);
+			fileOutput.println("NV=" + tam_vector);
             fileOutput.println("numPasadas=" + num_pasadas);
             fileOutput.println("NR=" + num_ref);
             fileOutput.println("NP=" + num_pag);
@@ -71,7 +72,7 @@ public class GeneradorReferencias {
             return sol;
         }
     public static void main(String[] Args){
-        generarArchivo(300, 20, 142, 256, 0, "hola.txt");
+        generarArchivo(300, 20, 142, 256, 5, "hola.txt");
     }
 
 }
