@@ -21,20 +21,33 @@ public class generadorReferencias {
 
         for (int pasada = 0; pasada < num_pasadas; pasada++) {
             for (int i = 0; i < filas; i++) {
-                for (int j = 0; j < columnas; j++)
+                for (int j = 0; j < columnas; j++) {
                     //m[i][j] = (byte) ((m[i][j] + v[j % v.length]) & 0xFF);
-                    escribirReferencia(null, nombre_archivo, i, j, j, tam_pag);
+                    escribirReferencia(pw, "mat1", i, j, (i * columnas) + j, tam_pag);
+
+                    int idxV = j % tam_vector;
+                        escribirReferencia(pw, "v", 0, idxV, (filas * columnas) + idxV, tam_pag);
             }
         }
+    }
             for (int j = 0; j < columnas; j++) {
-                for (int i = 0; i < filas; i++) {
-                    m[i][j] = (byte) ((m[i][j] ^ v[i % v.length]) & 0xFF);
+               for (int i = 0; i < filas; i++) {
+                    //m[i][j] = (byte) ((m[i][j] ^ v[i % v.length]) & 0xFF);
+                    escribirReferencia(pw, "mat1", i, j, (i * columnas) + j, tam_pag);
+
+                    int idxV = i % tam_vector;
+                    escribirReferencia(pw, "v", 0, idxV, (filas * columnas) + idxV, tam_pag);
+
+                    escribirReferencia(pw, "mat1", i, j, (i * columnas) + j, tam_pag);
                 }
             }
         
-        
-        
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+    }
+        
+
     public static void Archivo(int filas, int columnas, int tam_vector, int tam_pag, int num_pasadas, String nombre_archivo){
 		try {
             File Obj = new File("myfile.txt");
