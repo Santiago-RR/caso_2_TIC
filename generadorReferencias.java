@@ -1,3 +1,9 @@
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 public class generadorReferencias {
     
     public static void generarArchivo(int filas, int columnas, int tam_vector, int tam_pag, int num_pasadas, String nombre_archivo){
@@ -5,11 +11,19 @@ public class generadorReferencias {
         int totalBytes = (filas*columnas) + tam_vector;
         int num_pag = (int) Math.ceil((double) totalBytes/tam_pag); 
 
-        
+        try (PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(nombre_archivo)))) {
+            pw.println("TP=" + tam_pag);
+            pw.println("NF1=" + filas);
+            pw.println("NC1=" + columnas);
+            pw.println("numPasadas=" + num_pasadas);
+            pw.println("NR=" + num_ref);
+            pw.println("NP=" + num_pag);
+
         for (int pasada = 0; pasada < num_pasadas; pasada++) {
             for (int i = 0; i < filas; i++) {
                 for (int j = 0; j < columnas; j++)
-                    m[i][j] = (byte) ((m[i][j] + v[j % v.length]) & 0xFF);
+                    //m[i][j] = (byte) ((m[i][j] + v[j % v.length]) & 0xFF);
+                    escribirReferencia(null, nombre_archivo, i, j, j, tam_pag);
             }
         }
             for (int j = 0; j < columnas; j++) {
@@ -66,5 +80,11 @@ public class generadorReferencias {
 
     }
     
-    
+    private static void escribirReferencia(PrintWriter pw, String prefijo, int i, int j, int dv, int tam_pagina) {
+        int pagina = dv / tam_pagina;
+        int desplazamiento = dv % tam_pagina;
+        pw.println("[" + prefijo + "-" + i + "-" + j + "]," + pagina + "," + desplazamiento);
+    }
+
+
     }
