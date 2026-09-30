@@ -26,7 +26,9 @@ public class generadorReferencias {
                     escribirReferencia(pw, "mat1", i, j, (i * columnas) + j, tam_pag);
 
                     int idxV = j % tam_vector;
-                        escribirReferencia(pw, "v", 0, idxV, (filas * columnas) + idxV, tam_pag);
+                    escribirReferencia(pw, "v", 0, idxV, (filas * columnas) + idxV, tam_pag);
+                    
+                    escribirReferencia(pw, "mat1", i, j, (i * columnas) + j, tam_pag);
             }
         }
     }
