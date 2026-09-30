@@ -14,7 +14,7 @@ public class GeneradorReferencias {
         int num_pag = (int) Math.ceil((double) totalBytes/tam_pag); 
 
         try {
-			PrintWriter fileOutput = new PrintWriter("FileOutput.txt");
+			PrintWriter fileOutput = new PrintWriter(nombre_archivo);
 
             fileOutput.println("TP=" + tam_pag);
             fileOutput.println("NF1=" + filas);
@@ -71,7 +71,7 @@ public class GeneradorReferencias {
             return sol;
         }
     public static void main(String[] Args){
-        generarArchivo(300, 20, 142, 256, 0, null);
+        generarArchivo(300, 20, 142, 256, 0, "hola.txt");
     }
 
 }
